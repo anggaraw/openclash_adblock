@@ -19,12 +19,11 @@ jobs:
           sed -i '1i payload:' AdguardDNS.yaml
           rm -fr AdguardDNS.yamle filter.txte filter.txt
           
-          echo "Downloading AdAway block list..."
-          curl -s 'https://adguardteam.github.io/HostlistsRegistry/assets/filter_5.txt' -o filter_5.txt
-          sed -i 's/127\.0\.0\.1  localhost//g; s/::1  localhost//g; s/^127\.0\.0\.1\s/  - DOMAIN,/g' adaway.yaml
-          sed -i 's/^#\s\[.*\]$//g' adaway.yaml
-          sed -i '/^$/d' adaway.yaml
-          sed -i '20s/#/#\n\npayload:/' adaway.yaml
+          echo "Downloading Adguard DNS block list..."
+          curl -s https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt -o filter_5.txt
+          grep -o -P '(?<=^\|\|).*(?=\^$)' filter_5.txt | grep -v '\*' > adaway.yaml
+          sed -ie '/^#/! s/^/  - DOMAIN,/' adaway.yaml
+          sed -i '1i payload:' adaway.yaml
           rm -fr adaway.yamle filter_5.txte filter_5.txt
           
           echo "Downloading ABPIndo block list..."
