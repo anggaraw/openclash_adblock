@@ -20,11 +20,11 @@ jobs:
           rm -fr AdguardDNS.yamle filter.txte filter.txt
           
           echo "Downloading Adaway block list..."
-          curl -s https://adguardteam.github.io/HostlistsRegistry/assets/filter_27.txt -o filter_27.txt
-          grep -o -P '(?<=^\|\|).*(?=\^$)' filter_27.txt | grep -v '\*' > adaway.yaml
+          curl -s https://adguardteam.github.io/AdGuardSDNSFilter/Filters/filter.txt -o filter.txt
+          grep -o -P '(?<=^\|\|).*(?=\^$)' filter.txt | grep -v '\*' > adaway.yaml
           sed -ie '/^#/! s/^/  - DOMAIN,/' adaway.yaml
           sed -i '1i payload:' adaway.yaml
-          rm -fr adaway.yamle filter_27.txte filter_27.txt
+          rm -fr adaway.yamle filter.txte filter.txt
           
           echo "Downloading ABPIndo block list..."
           curl -s 'https://raw.githubusercontent.com/ABPindo/indonesianadblockrules/master/subscriptions/domain.txt' -o ABPindo.yaml
