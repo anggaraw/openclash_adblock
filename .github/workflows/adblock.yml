@@ -32,6 +32,12 @@ jobs:
           sed -ie '/^#/! s/^/  - DOMAIN,/' ABPindo.yaml
           sed -i '1s/^/payload:\n/' ABPindo.yaml
           rm -fr ABPindo.yamle
+          
+          echo "Downloading OISD block list..."
+          curl -s 'https://raw.githubusercontent.com/ABPindo/indonesianadblockrules/master/subscriptions/domain.txt' -o OISD_big.yaml
+          sed -ie '/^#/! s/^/  - DOMAIN,/' OISD_big.yaml
+          sed -i '1s/^/payload:\n/' OISD_big.yaml
+          rm -fr OISD_big.yamle
       - uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: Automatic update
