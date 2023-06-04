@@ -19,7 +19,7 @@ jobs:
           sed -i '1i payload:' AdguardDNS.yaml
           rm -fr AdguardDNS.yamle filter.txte filter.txt
           
-          echo "Downloading Adguard DNS block list..."
+          echo "Downloading Adaway block list..."
           curl -s https://adguardteam.github.io/HostlistsRegistry/assets/filter_27.txt -o filter_27.txt
           grep -o -P '(?<=^\|\|).*(?=\^$)' filter_27.txt | grep -v '\*' > adaway.yaml
           sed -ie '/^#/! s/^/  - DOMAIN,/' adaway.yaml
